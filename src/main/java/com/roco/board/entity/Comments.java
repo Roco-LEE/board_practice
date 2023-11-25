@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+public class Comments {
 	@Id
 	private Long id;
 	private String content;

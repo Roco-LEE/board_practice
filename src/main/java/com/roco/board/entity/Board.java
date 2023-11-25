@@ -29,7 +29,7 @@ public class Board {
 	@ToString.Exclude
 	@OneToMany(mappedBy = "board", cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, orphanRemoval = true)
 	@Builder.Default
-	private List<Comment> comments = new ArrayList<>();
+	private List<Comments> comments = new ArrayList<>();
 	
 	
 
