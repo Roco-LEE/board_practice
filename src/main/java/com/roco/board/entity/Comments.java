@@ -27,5 +27,6 @@ public class Comments {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "boardId")
 	private Board board;
+	//commit test
 
 }
