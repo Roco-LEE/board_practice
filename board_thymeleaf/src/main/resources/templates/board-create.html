@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>게시글 작성</title>
+	<link th:href="@{/css/table.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<form id="form" method="post" action="/boardr">
+	<table>
+		<tbody>
+			<tr>
+				<td >작성자</td>
+				<td ><input type="text" name="createdBy" id="createdBy"/></td>
+			</tr>
+			<tr>
+				<td >비밀번호</td>
+				<td ><input type="password" name="password" id="password"/></td>
+			</tr>
+			<tr>
+				<td >제목</td>
+				<td ><input type="text" name="title" id="title"/></td>
+			</tr>
+			<tr>
+				<td >내용</td>
+				<td ><input type="text" name="content" id="content"/></td>
+			</tr>
+		</tbody>
+	</table>
+	<button type="submit">작성</button>
+</form>
+
+</body>
+
+</html>

@@ -27,5 +27,16 @@ public class BoardController {
 		model.addAttribute("board", boardService.boardDetail(id));
 		return "board";
 	}
+	
+	@GetMapping("/new")
+	public String createBoard() {
+		return "board-create";
+	}
+	
+	@GetMapping("/update")
+	public String updateBoard(Model model) {
+		model.addAttribute("board", boardService.boardDetail(id));
+		return "board-update";
+	}
 
 }
