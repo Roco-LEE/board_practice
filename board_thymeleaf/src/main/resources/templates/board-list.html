@@ -24,7 +24,7 @@
 		</thead>
 		<tbody>
 			<div th:each="board : ${boardList}">
-				<tr th:onclick="'move(' + ${board.id} + ')'">
+				<tr>
 					<td><a th:text="${board.id}"></a></td>
 					<td><a th:text="${board.title}" th:href="'/board/'+${board.id}"></a></td>
 					<td><a th:text="${board.createdBy}"></a></td>
@@ -37,11 +37,5 @@
 
 </body>
 
-<script>
-	function move(id) {
-		location.href = '/board/' + id;
-	}
-
-</script>
 
 </html>

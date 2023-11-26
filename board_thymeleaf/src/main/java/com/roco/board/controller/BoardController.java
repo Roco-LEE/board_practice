@@ -45,8 +45,9 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
-	@PutMapping("/update")
+	@PutMapping
 	public String updateBoard(Model model) {
+		
 		return "board-update";
 	}
 
