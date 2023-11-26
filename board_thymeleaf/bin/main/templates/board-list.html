@@ -4,14 +4,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>게시판 리스트</title>
-	
+
 	<link th:href="@{/css/table.css}" rel="stylesheet">
 </head>
 
 <body>
-	
+
 	<button type="button" onclick="location.href = '/board/new'">글쓰기</button>
-	
+
 	<table>
 		<thead>
 			<tr>
@@ -23,16 +23,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="board : ${boardList}">
-				<td><a th:text="${board.id}" th:href="'/board/'+${board.id}"></a></td>
-				<td><a th:text="${board.title}" th:href="'/board/'+${board.id}"></a></td>
-				<td><a th:text="${board.createdBy}" th:href="'/board/'+${board.id}"></a></td>
-				<td><a th:text="${board.readCount}" th:href="'/board/'+${board.id}"></a></td>
-				<td><a th:text="${board.likeCount}" th:href="'/board/'+${board.id}"></a></td>
-			</tr>
+			<div th:each="board : ${boardList}">
+				<tr th:onclick="'move(' + ${board.id} + ')'">
+					<td><a th:text="${board.id}"></a></td>
+					<td><a th:text="${board.title}" th:href="'/board/'+${board.id}"></a></td>
+					<td><a th:text="${board.createdBy}"></a></td>
+					<td><a th:text="${board.readCount}"></a></td>
+					<td><a th:text="${board.likeCount}"></a></td>
+				</tr>
+			</div>
 		</tbody>
 	</table>
 
 </body>
+
+<script>
+	function move(id) {
+		location.href = '/board/' + id;
+	}
+
+</script>
 
 </html>

@@ -13,31 +13,34 @@
 			
 		<tbody>
 			<tr>
-				<td >번호</td>
-				<td th:text="${board.id}">번호</td>
-				<td >제목</td>
-				<td th:text="${board.title}">제목</td>
+				<td >[번호]</td>
+				<td th:text="${board.id}">[번호]</td>
+				<td >[제목]</td>
+				<td th:text="${board.title}">[제목]</td>
 			</tr>
 			<tr>
-				<td >글쓴이</td>
-				<td th:text="${board.createdBy}">글쓴이</td>
-				<td >조회수</td>
-				<td th:text="${board.readCount}">조회수</td>
+				<td >[글쓴이]</td>
+				<td th:text="${board.createdBy}">[글쓴이]</td>
+				<td >[조회수]</td>
+				<td th:text="${board.readCount}">[조회수]</td>
 			</tr>
 			<tr>
-				<td >작성시각</td>
-				<td th:text="${board.createdAt}">작성시각</td>
-				<td>최종수정</td>
-				<td th:text="${board.updatedAt}">최종수정</td>
+				<td >[작성시각]</td>
+				<td th:text="${board.createdAt}">[작성시각]</td>
+				<td>[최종수정]</td>
+				<td th:text="${board.updatedAt}">[최종수정]</td>
 			</tr>
 			<tr>
-				<td colspan="4">내용</td>
+				<td colspan="4">[내용]</td>
 			</tr>
 			<tr>
 				<td th:text="${board.content}" colspan="4"></td>
 			</tr>
 		</tbody>
 	</table>
+	
+	<button type="button" onclick="location.href = '/board/update'">수정하기</button>
+	<button type="button" onclick="location.href = '/board'">목록으로</button>
 
 </body>
 

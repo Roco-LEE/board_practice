@@ -26,7 +26,6 @@ public class BaseEntity {
 	@Column(updatable = false) // DB 변경요청이 들어와도 변경하지 않도록 설정
 	@ToString.Exclude
 	private LocalDateTime createdAt; // 최초 생성시각
-	@UpdateTimestamp
 	private LocalDateTime updatedAt; // 갱신 시각
 
 }
