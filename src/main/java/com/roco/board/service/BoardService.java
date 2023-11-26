@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 public interface BoardService {
 	Board createBoard(CreateBoardDto dto);
 	
+	Board boardDetail(Long id);
 	List<Board> boardList();
 	
 	Board updateBoard(UpdateBoardDto dto);
