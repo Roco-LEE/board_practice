@@ -3,28 +3,25 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>게시판 리스트</title>
+	<title th:text="${board.id}+'번 게시글 보기'">게시글 보기</title>
+	<link th:href="@{/css/table.css}" rel="stylesheet">
 </head>
 
 <body>
 
-	<table class="editorDemoTable">
-		<thead>
-			<tr>
-				<td><strong>번호</strong></td>
-				<td><strong>제목</strong></td>
-				<td><strong>글쓴이</strong></td>
-				<td><strong>조회수</strong></td>
-				<td><strong>좋아요</strong></td>
-			</tr>
-		</thead>
+	<table>
+			
 		<tbody>
-			<tr th:each="board : ${boardList}">
-				<td th:text="${board.id}"></td>
-				<td th:text="${board.title}"></td>
-				<td th:text="${board.createdBy}"></td>
-				<td th:text="${board.readCount}"></td>
-				<td th:text="${board.likeCount}"></td>
+			<tr>
+				<td th:text="${'번호 : '+board.id}">번호</td>
+				<td th:text="${board.title}">제목</td>
+			</tr>
+			<tr>
+				<td th:text="${'글쓴이 : '+board.createdBy}">글쓴이</td>
+				<td th:text="${'조회수 : '+board.createdBy}">조회수</td>
+			</tr>
+			<tr>
+				<td th:text="${board.content}" colspan="2"></td>
 			</tr>
 		</tbody>
 	</table>
