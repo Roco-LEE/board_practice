@@ -1,7 +1,9 @@
 package com.roco.board.controller;
 
+import java.net.URI;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +35,7 @@ public class BoardRestController {
 				boardService.deleteBoard(id);
 				return new ResponseEntity<>("Board Deleted Successfully", HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>("Board Deleted Successfully", HttpStatus.OK);
+				return null;
 			}
 		}catch (Exception e) {
 			return new ResponseEntity<>("Error Deleting Board", HttpStatus.INTERNAL_SERVER_ERROR);
