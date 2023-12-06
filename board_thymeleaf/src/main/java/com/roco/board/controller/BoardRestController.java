@@ -26,20 +26,27 @@ import lombok.RequiredArgsConstructor;
 public class BoardRestController {
 	private final BoardService boardService;
 	
-	@DeleteMapping("/board/{id}")
-	public ResponseEntity<?> deleteBoard(@RequestBody Map<String, Object> request) {
+	@PostMapping("/board/{id}")
+	public ResponseEntity<?> pwCheck(@RequestBody Map<String, Object> request) {
 		Long id = Long.parseLong(request.get("id").toString());
 	    String password = request.get("password").toString();
+	    String reqType = request.get("reqType").toString();
 		try {
 			if(password.equals(boardService.boardDetail(id).getPassword())) {
-				boardService.deleteBoard(id);
-				return new ResponseEntity<>("Board Deleted Successfully", HttpStatus.OK);
+				if(reqType.equals("delete")) {
+					boardService.deleteBoard(id);
+					return new ResponseEntity<>("Board Deleted Successfully", HttpStatus.OK);
+				} else if(reqType.equals("update")) {
+					
+					return new ResponseEntity<>("Board Updated Successfully", HttpStatus.OK);
+				}
 			} else {
 				return null;
 			}
 		}catch (Exception e) {
 			return new ResponseEntity<>("Error Deleting Board", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return null;
 	}
 	
 	

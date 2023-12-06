@@ -24,6 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public boolean checkBoard(Long id) {
+		return boardRepository.existsById(id);
+	}
+	
+	@Override
 	public Board boardDetail(Long id) {
 		Board board = boardRepository.findById(id).get();
 		board.setReadCount(board.getReadCount()+1L);

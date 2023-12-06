@@ -98,42 +98,40 @@
 
 <script>
 	function pwCheck(attr) {
-		var name = attr;
+		var reqType = attr;
 		//모달 띄우기
 		document.getElementById('pwCheckModal').style.display = 'block';
 		//X클릭 시 모달 닫기
 		document.getElementsByClassName('close')[0].addEventListener('click', function () {
 			document.getElementById('pwCheckModal').style.display = 'none';
 		});
-		
+
 		document.getElementById('confirm').addEventListener('click', function () {
 			var boardId = document.getElementById('boardId').innerText;
 			var password = document.getElementById('passwordInput').value;
 			var data = {
 				id: boardId,
-				password: password
+				password: password,
+				reqType: reqType
 			};
-			if(name === 'delete') {
-				sendAjaxRequest('/board/'+boardId, 'DELETE', data);
-			} else if(name === 'update') {
-				sendAjaxRequest('/board', 'PUT', data);
-			}
-			
+			sendAjaxRequest('/board/' + boardId, 'POST', data, (e) => {
+				alert(e);
+			});
 
 			document.getElementById('pwCheckModal').style.display = 'none';
 		});
 	}
-	
+
 	function sendAjaxRequest(url, method, data, callback) {
 		var xhr = new XMLHttpRequest();
 		xhr.open(method, url, true);
 		xhr.responseType = "json";
 		xhr.onreadystatechange = () => {
-			if(xhr.readyState === 4) {
-				if(xhr.status === 200) {
-					alert('삭제가 완료되었습니다.');
-					location.href='/board'
-				} else if(xhr.status === 303) {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					callback(e);
+					alert('alert');
+				} else if (xhr.status === 303) {
 					alert('패스워드를 확인하세요');
 				}
 			}

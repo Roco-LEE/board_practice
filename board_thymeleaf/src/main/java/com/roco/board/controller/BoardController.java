@@ -29,6 +29,7 @@ public class BoardController {
 	
 	@GetMapping("/{id}")
 	public String board(@PathVariable(name = "id") Long id, Model model) {
+		if(!boardService.checkBoard(id)) return "redirect:/board";
 		model.addAttribute("board", boardService.boardDetail(id));
 		return "board";
 	}
