@@ -14,19 +14,23 @@
 		<tbody>
 			<tr>
 				<td >작성자</td>
-				<td ><input type="text" name="createdBy" id="createdBy"/></td>
+				<td name="createdBy" id="createdBy" th:text="${board.createdBy}"></td>
 			</tr>
 			<tr>
 				<td >비밀번호</td>
 				<td ><input type="password" name="password" id="password"/></td>
 			</tr>
 			<tr>
+				<td >비밀번호 확인</td>
+				<td ><input type="password" name="password_check" id="password_check"/></td>
+			</tr>
+			<tr>
 				<td >제목</td>
-				<td ><input type="text" name="title" id="title"/></td>
+				<td ><input type="text" name="title" id="title" th:value="${board.title}"/></td>
 			</tr>
 			<tr>
 				<td >내용</td>
-				<td ><input type="text" name="content" id="content"/></td>
+				<td ><input type="text" name="content" id="content" th:value="${board.password}"/></td>
 			</tr>
 		</tbody>
 	</table>

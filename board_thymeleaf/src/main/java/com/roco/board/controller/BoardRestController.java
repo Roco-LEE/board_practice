@@ -19,6 +19,7 @@ import com.roco.board.dto.CreateBoardDto;
 import com.roco.board.entity.Board;
 import com.roco.board.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,7 +28,7 @@ public class BoardRestController {
 	private final BoardService boardService;
 	
 	@PostMapping("/board/{id}")
-	public ResponseEntity<?> pwCheck(@RequestBody Map<String, Object> request) {
+	public ResponseEntity<?> pwCheck(@RequestBody Map<String, Object> request, HttpSession session) {
 		Long id = Long.parseLong(request.get("id").toString());
 	    String password = request.get("password").toString();
 	    String reqType = request.get("reqType").toString();
@@ -37,11 +38,11 @@ public class BoardRestController {
 					boardService.deleteBoard(id);
 					return new ResponseEntity<>("Board Deleted Successfully", HttpStatus.OK);
 				} else if(reqType.equals("update")) {
-					
-					return new ResponseEntity<>("Board Updated Successfully", HttpStatus.OK);
+					session.setAttribute("updateId", id);
+					return new ResponseEntity<>("Board Updated Successfully", HttpStatus.ACCEPTED);
 				}
 			} else {
-				return null;
+				return new ResponseEntity<>("Password Incorrect", HttpStatus.SERVICE_UNAVAILABLE);
 			}
 		}catch (Exception e) {
 			return new ResponseEntity<>("Error Deleting Board", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -13,6 +13,7 @@ import com.roco.board.dto.CreateBoardDto;
 import com.roco.board.entity.Board;
 import com.roco.board.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -46,9 +47,12 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
-	@PutMapping
-	public String updateBoard(Model model) {
-		
+	@GetMapping("/update/{id}")
+	public String updateBoard(@PathVariable(name = "id") Long id, Model model, HttpSession session) {
+		if((Long)session.getAttribute("updateId") != id) {
+			return "redirect:/board";
+		};
+		model.addAttribute("board", boardService.boardDetail(id));
 		return "board-update";
 	}
 

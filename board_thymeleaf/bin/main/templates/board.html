@@ -102,11 +102,18 @@
 		//모달 띄우기
 		document.getElementById('pwCheckModal').style.display = 'block';
 		//X클릭 시 모달 닫기
-		document.getElementsByClassName('close')[0].addEventListener('click', function () {
+		document.getElementsByClassName('close')[0].addEventListener('click', () => {
+			document.getElementById('passwordInput').value = '';
+    		reqType = '';
 			document.getElementById('pwCheckModal').style.display = 'none';
 		});
 
-		document.getElementById('confirm').addEventListener('click', function () {
+		var button = document.getElementById('confirm');
+
+		button.removeEventListener('click', buttonClick);
+		button.addEventListener('click', buttonClick);
+
+		function buttonClick() {
 			var boardId = document.getElementById('boardId').innerText;
 			var password = document.getElementById('passwordInput').value;
 			var data = {
@@ -119,8 +126,10 @@
 			});
 
 			document.getElementById('pwCheckModal').style.display = 'none';
-		});
+		}
 	}
+
+
 
 	function sendAjaxRequest(url, method, data, callback) {
 		var xhr = new XMLHttpRequest();
@@ -129,13 +138,14 @@
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
-					callback(e);
-					alert('alert');
-				} else if (xhr.status === 303) {
+					location.href='board';
+				} else if(xhr.status === 202) {
+					location.href='update/'+data.id;
+				} else if (xhr.status === 503) {
 					alert('패스워드를 확인하세요');
 				}
 			}
-		}
+		};
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.send(JSON.stringify(data));
 	}
