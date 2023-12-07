@@ -9,21 +9,13 @@
 
 <body>
 
-<form id="form" method="post" action="/boardr">
+<form id="form" method="post" action="/board/update">
 	<input type="hidden" id="id" name="id" th:value="${board.id}"></input>
 	<table>
 		<tbody>
 			<tr>
 				<td >작성자</td>
 				<td name="createdBy" id="createdBy" th:text="${board.createdBy}" style="width: 700px; height: 100%;"/></td>
-			</tr>
-			<tr>
-				<td >비밀번호</td>
-				<td ><input type="password" name="password" id="password" style="width: 700px; height: 100%;"/></td>
-			</tr>
-			<tr>
-				<td >비밀번호 확인</td>
-				<td ><input type="password" name="password_check" id="password_check"  style="width: 700px; height: 100%;"/></td>
 			</tr>
 			<tr>
 				<td >제목</td>

@@ -27,9 +27,15 @@
 			</tr>
 			<tr>
 				<td>[작성시각]</td>
-				<td th:text="${board.createdAt}">[작성시각]</td>
+				<td th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm:ss')}">[작성시각]</td>
+				<div th:if="${board.createdAt != board.updatedAt}">
 				<td>[최종수정]</td>
-				<td th:text="${board.updatedAt}">[최종수정]</td>
+				<td th:text="${#temporals.format(board.updatedAt, 'yyyy-MM-dd HH:mm:ss')}">[최종수정]</td>
+				</div>
+				<div th:if="${board.createdAt == board.updatedAt}">
+				<td></td>
+				<td></td>
+				</div>
 			</tr>
 			<tr>
 				<td colspan="4">[내용]</td>
@@ -64,6 +70,7 @@
 			<span class="close">&times;</span>
 			<p>비밀번호를 입력하세요</p>
 			<input type="password" id="passwordInput">
+			<div id="pwValidate"></div>
 			<button id="confirm">확인</button>
 		</div>
 	</div>
@@ -90,6 +97,12 @@
 		function buttonClick() {
 			var boardId = document.getElementById('boardId').innerText;
 			var password = document.getElementById('passwordInput').value;
+			
+			if(password === '') {
+				alert('패스워드를 입력하세요')
+				return;
+			}
+			
 			var data = {
 				id: boardId,
 				password: password,
@@ -103,8 +116,6 @@
 		}
 	}
 
-
-
 	function sendAjaxRequest(url, method, data, callback) {
 		var xhr = new XMLHttpRequest();
 		xhr.open(method, url, true);
@@ -112,17 +123,21 @@
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
+					alert(data.id + '번 게시글이 삭제되었습니다.')
 					location.href='/board';
 				} else if(xhr.status === 202) {
 					location.href='update/'+data.id;
 				} else if (xhr.status === 503) {
-					alert('패스워드를 확인하세요');
+					alert('패스워드가 틀렸습니다.');
 				}
 			}
 		};
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.send(JSON.stringify(data));
 	}
+	
+	
+	
 
 </script>
 

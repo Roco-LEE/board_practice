@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roco.board.dto.CreateBoardDto;
+import com.roco.board.dto.UpdateBoardDto;
 import com.roco.board.entity.Board;
 import com.roco.board.service.BoardService;
 
@@ -56,4 +57,11 @@ public class BoardController {
 		return "board-update";
 	}
 
+	@PostMapping("/update")
+	public String updateBoardAction(@RequestParam("id") Long id, @RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("password") String password) {
+		UpdateBoardDto dto = UpdateBoardDto.builder().id(id).title(title).content(content).build();
+		boardService.updateBoard(dto);
+		return "redirect:/board/"+id;
+	}
+	
 }
