@@ -27,14 +27,14 @@
 			</tr>
 			<tr>
 				<td>[작성시각]</td>
-				<td th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm:ss')}">[작성시각]</td>
-				<div th:if="${board.createdAt != board.updatedAt}">
-				<td>[최종수정]</td>
-				<td th:text="${#temporals.format(board.updatedAt, 'yyyy-MM-dd HH:mm:ss')}">[최종수정]</td>
+				<td th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+				<div th:if="${board.createdAt == board.updatedAt || board.updatedAt == null}">
+					<td></td>
+					<td></td>
 				</div>
-				<div th:if="${board.createdAt == board.updatedAt}">
-				<td></td>
-				<td></td>
+				<div th:if="${board.createdAt != board.updatedAt && board.updatedAt != null}">
+					<td>[최종수정]</td>
+					<td th:text="${#temporals.format(board.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
 				</div>
 			</tr>
 			<tr>
@@ -44,7 +44,7 @@
 				<td th:text="${board.content}" colspan="4"></td>
 			</tr>
 		</tbody>
-		
+
 	</table>
 
 	<div style="text-align: center;">
@@ -54,16 +54,29 @@
 		<div id="deleteCheck"></div>
 		<div id="updateCheck"></div>
 	</div>
+
+	<table style="margin-top: 10px;">
+		<tr>
+			<td>
+				<form>
+					<input type="text" style="width: 80%; height: 750px;"/>
+				</form>
+			</td>
+			<td>
+				<button type="submit">댓글달기</button>
+			</td>
+		</tr>
+	</table>
 	
 	<table style="margin-top: 10px;">
 		<tr>
-				<td>댓글</td>
-			</tr>
-			<tr>
-				<td>댓글</td>
-			</tr>
+			<td>댓글</td>
+		</tr>
+		<tr>
+			<td>댓글</td>
+		</tr>
 	</table>
-	
+
 
 	<div id="pwCheckModal" class="modal">
 		<div class="modal-content">
@@ -85,7 +98,7 @@
 		//X클릭 시 모달 닫기
 		document.getElementsByClassName('close')[0].addEventListener('click', () => {
 			document.getElementById('passwordInput').value = '';
-    		reqType = '';
+			reqType = '';
 			document.getElementById('pwCheckModal').style.display = 'none';
 		});
 
@@ -97,12 +110,12 @@
 		function buttonClick() {
 			var boardId = document.getElementById('boardId').innerText;
 			var password = document.getElementById('passwordInput').value;
-			
-			if(password === '') {
+
+			if (password === '') {
 				alert('패스워드를 입력하세요')
 				return;
 			}
-			
+
 			var data = {
 				id: boardId,
 				password: password,
@@ -124,9 +137,9 @@
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
 					alert(data.id + '번 게시글이 삭제되었습니다.')
-					location.href='/board';
-				} else if(xhr.status === 202) {
-					location.href='update/'+data.id;
+					location.href = '/board';
+				} else if (xhr.status === 202) {
+					location.href = 'update/' + data.id;
 				} else if (xhr.status === 503) {
 					alert('패스워드가 틀렸습니다.');
 				}
@@ -135,9 +148,9 @@
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.send(JSON.stringify(data));
 	}
-	
-	
-	
+
+
+
 
 </script>
 
